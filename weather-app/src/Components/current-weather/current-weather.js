@@ -6,14 +6,12 @@ const WEEK_DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satu
 function forecastGenerator(futureWeather){
   const dayInAWeek = new Date().getDay();
   const forecastDays = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(WEEK_DAYS.slice(0, dayInAWeek));
-  let dailyAverages = []
-  console.log(futureWeather);
+  let dailyAverages = [];
   for (let i = 0; i < 5; i++){
     let low = futureWeather[i*8].main.temp_max;
     let high = futureWeather[i*8].main.temp_min;
     for (let j = 1; j < 8; j++){
       let time = (i*8+j)
-      console.log(time)
       if(Math.round(futureWeather[time].main.temp_max) > high){
         high = Math.round(futureWeather[time].main.temp_max);
       }
@@ -21,11 +19,9 @@ function forecastGenerator(futureWeather){
         low = Math.round(futureWeather[time].main.temp_min);
       }
     }
-    console.log(`limits:${low},${high}`)
     dailyAverages.push({icon: futureWeather[i*8+4].weather[0].icon, day: forecastDays[i] ,lowsAndHighs:[low,high]})
     
   }
-  console.log(dailyAverages);
   return dailyAverages.map((day) => {return <ForecastedWeather data={day}/>})
 }
 
@@ -53,19 +49,15 @@ const CurrentWeather = ({data, cityForecast}) => {
           <div className="w-1/2 justify-end -space-y-1">
             <p className="text-sm text-white text-left flex justify-between" alt="FeelsLike">
               <span>Feels like:</span>
-              <span>{data.main.feels_like}°F</span>
-            </p>
-            <p className="text-sm text-white text-left flex justify-between" alt="Percipitation">
-              <span>Percipitation:</span>
-              {}
+              <span>{data.main.feels_like}<span className="text-xs">°F</span></span>
             </p>
             <p className="text-sm text-white text-left flex justify-between" alt="Humidity">
               <span>Humidity:</span>
-              <span>{data.main.humidity}%</span>
+              <span>{data.main.humidity}<span className="text-xs">%</span></span>
             </p>
             <p className="text-sm text-white text-left flex justify-between" alt="Wind">
               <span>Wind:</span>
-              <span>{data.wind.speed}m/s</span>
+              <span>{data.wind.speed}<span className="text-xs">m/s</span></span>
             </p>
           </div>
         </div>

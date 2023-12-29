@@ -17,7 +17,7 @@ function App() {
     .then(async (response) => {
       const weatherResponse = await response[0].json();
       const forecastResponse = await response[1].json();
-      console.log(forecastResponse.list);
+      
       setCurrentWeather({city: searchData.label, ...weatherResponse});
       setForecast(() => {return {city: searchData.label, futureWeather: forecastResponse.list}});
     }).catch((err) => console.log(err));
