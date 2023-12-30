@@ -12,14 +12,14 @@ function forecastGenerator(futureWeather){
     let high = futureWeather[i*8].main.temp_min;
     for (let j = 1; j < 8; j++){
       let time = (i*8+j)
-      if(Math.round(futureWeather[time].main.temp_max) > high){
-        high = Math.round(futureWeather[time].main.temp_max);
+      if(futureWeather[time].main.temp_max > high){
+        high = futureWeather[time].main.temp_max;
       }
-      if(Math.round(futureWeather[time].main.temp_min) < low){
-        low = Math.round(futureWeather[time].main.temp_min);
+      if(futureWeather[time].main.temp_min < low){
+        low = futureWeather[time].main.temp_min;
       }
     }
-    dailyAverages.push({icon: futureWeather[i*8+4].weather[0].icon, day: forecastDays[i] ,lowsAndHighs:[low,high]})
+    dailyAverages.push({icon: futureWeather[i*8+4].weather[0].icon, day: forecastDays[i] ,lowsAndHighs:[Math.round(low),Math.round(high)]})
     
   }
   return dailyAverages.map((day) => {return <ForecastedWeather data={day}/>})
