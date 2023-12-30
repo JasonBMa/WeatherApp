@@ -27,7 +27,6 @@ function forecastGenerator(futureWeather){
 
 const CurrentWeather = ({data, cityForecast}) => {
 
-
   return (
     <div className="flex justify-center">
       <div className="mt-3 p-3 w-96 h-72 bg-gray-700 rounded-md border border-gray-600 shadow-xl shadow-gray-800">
@@ -38,7 +37,7 @@ const CurrentWeather = ({data, cityForecast}) => {
             <p className="text-l text-gray-200 text-left" alt="weather-description">{data.weather[0].description}</p>
           </div>
           <div className="w-1/6">
-            <img className="object-fill" src={`icons/${data.weather[0].icon}.png`} alt="weatherIcon"/>
+            <img className="object-fill" src={require(`./icons/${data.weather[0].icon}.png`)} alt="weatherIcon"/>
           </div>
         </div>
 
